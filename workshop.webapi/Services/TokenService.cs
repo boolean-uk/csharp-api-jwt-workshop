@@ -7,12 +7,12 @@ using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
 using workshop.webapi.DataModels;
+using Microsoft.AspNetCore.Identity;
 
 public class TokenService
 {
     private const int ExpirationMinutes = 60;
     private readonly ILogger<TokenService> _logger;
-
     public TokenService(ILogger<TokenService> logger)
     {
         _logger = logger;
@@ -20,6 +20,7 @@ public class TokenService
 
     public string CreateToken(ApplicationUser user)
     {
+   
         var expiration = DateTime.UtcNow.AddMinutes(ExpirationMinutes);
         var token = CreateJwtToken(
             CreateClaims(user),

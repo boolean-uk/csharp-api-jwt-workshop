@@ -12,7 +12,7 @@ using workshop.webapi.Data;
 namespace workshop.webapi.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240213182010_FirstMigration")]
+    [Migration("20240213200318_FirstMigration")]
     partial class FirstMigration
     {
         /// <inheritdoc />

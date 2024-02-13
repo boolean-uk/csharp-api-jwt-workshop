@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 using workshop.webapi.DataModels;
 
 namespace workshop.webapi.Data
@@ -13,6 +14,10 @@ namespace workshop.webapi.Data
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            //further information
+            //https://learn.microsoft.com/en-us/aspnet/core/security/authentication/customize-identity-model?view=aspnetcore-8.0
+
+
             modelBuilder.Entity<Car>().HasData(new Car { Id = 1, Make = "Mini", Model = "Clubman" });
             modelBuilder.Entity<Car>().HasData(new Car { Id = 2, Make = "VW", Model = "T5 California" });
             modelBuilder.Entity<Car>().HasData(new Car { Id = 3, Make = "VW", Model = "Up" });

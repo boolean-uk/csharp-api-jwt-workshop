@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 using workshop.webapi.DataModels;
 using workshop.webapi.DataTransfer.Requests;
 using workshop.webapi.Repository;
@@ -29,10 +30,10 @@ namespace workshop.webapi.Endpoints
 
         }
         [Authorize(Roles = "Admin")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status200OK)]        
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        public static async Task<IResult> Delete(IRepository<Car> repository, int id)
+        public static async Task<IResult> Delete(IRepository<Car> repository, ClaimsPrincipal user, int id)
         {
             var entity = await repository.GetById(id);
             if (entity == null)
@@ -40,7 +41,7 @@ namespace workshop.webapi.Endpoints
                 return TypedResults.NotFound($"Could not find Car with Id:{id}");
             }
             var result = await repository.Delete(entity);
-            return result != null ? TypedResults.Ok(new { Make = result.Make, Model = result.Model }) : TypedResults.BadRequest($"Car wasn't deleted");
+            return result != null ? TypedResults.Ok(new { DateTime=DateTime.Now, User=user.Email(), Car=new { Make = result.Make, Model = result.Model }}) : TypedResults.BadRequest($"Car wasn't deleted");
         }
         [Authorize(Roles = "Admin")]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

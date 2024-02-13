@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 namespace workshop.webapi
 {
-    public static class ClaimsPrincipalHelpers
+    public static class ClaimsPrincipalHelper
     {
         public static string? UserId(this ClaimsPrincipal user)
         {
