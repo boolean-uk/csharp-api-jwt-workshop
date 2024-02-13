@@ -1,4 +1,4 @@
-namespace workshop.webapi.Models;
+namespace workshop.webapi.DataTransfer.Requests;
 
 public class AuthRequest
 {

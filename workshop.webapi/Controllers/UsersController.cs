@@ -1,9 +1,10 @@
-﻿using JwtRoleAuthentication.Models;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using workshop.webapi.Data;
+using workshop.webapi.DataModels;
+using workshop.webapi.DataTransfer.Requests;
+using workshop.webapi.DataTransfer.Response;
 using workshop.webapi.Enums;
-using workshop.webapi.Models;
 using workshop.webapi.Services;
 
 namespace workshop.webapi.Controllers

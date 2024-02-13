@@ -1,4 +1,3 @@
-using workshop.webapi.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 
 namespace workshop.webapi.Services;
@@ -7,6 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using Microsoft.IdentityModel.Tokens;
 using System.Security.Claims;
 using System.Text;
+using workshop.webapi.DataModels;
 
 public class TokenService
 {

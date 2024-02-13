@@ -8,12 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Models\Page.cs" />
-    <Compile Remove="Models\PageDto.cs" />
-    <Compile Remove="Models\PagesDto.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="asp.versioning.mvc" Version="8.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.entityFrameworkcore" Version="8.0.1" />

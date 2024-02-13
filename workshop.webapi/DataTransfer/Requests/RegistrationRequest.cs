@@ -3,7 +3,6 @@
 using System.ComponentModel.DataAnnotations;
 using workshop.webapi.Enums;
 
-namespace JwtRoleAuthentication.Models;
 
 public class RegistrationRequest
 {

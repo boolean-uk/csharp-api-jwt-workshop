@@ -88,35 +88,7 @@ namespace workshop.webapi.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("workshop.webapi.DataModels.Post", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<Guid>("AuthorId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("fk_authorid");
-
-                    b.Property<string>("Body")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("body");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("title");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("posts");
-                });
-
-            modelBuilder.Entity("workshop.webapi.Models.ApplicationUser", b =>
+            modelBuilder.Entity("workshop.webapi.DataModels.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
@@ -183,9 +155,95 @@ namespace workshop.webapi.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("workshop.webapi.DataModels.Car", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Make")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("make");
+
+                    b.Property<string>("Model")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("model");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("cars");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Make = "Mini",
+                            Model = "Clubman"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Make = "VW",
+                            Model = "T5 California"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Make = "VW",
+                            Model = "Up"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Make = "VW",
+                            Model = "id5"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Make = "VW",
+                            Model = "Golf"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Make = "VW",
+                            Model = "Beetle"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Make = "VW",
+                            Model = "Polo"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Make = "Smart",
+                            Model = "ForTwo"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Make = "VW",
+                            Model = "Bournemouth"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            Make = "VW",
+                            Model = "Down"
+                        });
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("workshop.webapi.Models.ApplicationUser", null)
+                    b.HasOne("workshop.webapi.DataModels.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -194,7 +252,7 @@ namespace workshop.webapi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("workshop.webapi.Models.ApplicationUser", null)
+                    b.HasOne("workshop.webapi.DataModels.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -203,7 +261,7 @@ namespace workshop.webapi.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("workshop.webapi.Models.ApplicationUser", null)
+                    b.HasOne("workshop.webapi.DataModels.ApplicationUser", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)

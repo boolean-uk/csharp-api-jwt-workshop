@@ -1,25 +1,26 @@
 using System.Text;
 using System.Text.Json.Serialization;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using JwtRoleAuthentication.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Microsoft.Extensions.Options;
 using System.Diagnostics;
+using workshop.webapi.Services;
 using workshop.webapi.Data;
 using workshop.webapi.Endpoints;
 using workshop.webapi.Repository;
 using workshop.webapi.DataModels;
-using workshop.webapi.Models;
-using workshop.webapi.Services;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Add services
+builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
+
 builder.Services.AddSwaggerGen(option =>
 {
     option.SwaggerDoc("v1", new OpenApiInfo { Title = "Test API", Version = "v1" });
@@ -50,7 +51,6 @@ builder.Services.AddSwaggerGen(option =>
 
 builder.Services.AddProblemDetails();
 builder.Services.AddApiVersioning();
-builder.Services.AddControllers();
 builder.Services.AddRouting(options => options.LowercaseUrls = true);
 builder.Services.AddDbContext<DataContext>(opt =>
 {
@@ -58,8 +58,7 @@ builder.Services.AddDbContext<DataContext>(opt =>
     opt.LogTo(message => Debug.WriteLine(message));
 
 });
-builder.Services.AddScoped<IRepository<Post>, Repository<Post>>();
-// Register our TokenService dependency
+builder.Services.AddScoped<IRepository<Car>, Repository<Car>>();
 builder.Services.AddScoped<TokenService, TokenService>();
 
 // Support string to enum conversions
@@ -114,20 +113,24 @@ builder.Services.AddAuthentication(options =>
         };
     });
 
+// Build the app
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+
+// Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.ConfigureBlogEndpoint();
-app.MapControllers();
 app.UseHttpsRedirection();
+app.UseStatusCodePages();
 
+app.UseAuthentication();
+app.UseAuthorization();
 
+app.ConfigureCarEndpoint();
 
+app.MapControllers();
 app.Run();
-

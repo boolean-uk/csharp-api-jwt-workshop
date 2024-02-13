@@ -4,6 +4,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
+#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
+
 namespace workshop.webapi.Migrations
 {
     /// <inheritdoc />
@@ -36,6 +38,20 @@ namespace workshop.webapi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "cars",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    make = table.Column<string>(type: "text", nullable: false),
+                    model = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_cars", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -99,6 +115,23 @@ namespace workshop.webapi.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "cars",
+                columns: new[] { "id", "make", "model" },
+                values: new object[,]
+                {
+                    { 1, "Mini", "Clubman" },
+                    { 2, "VW", "T5 California" },
+                    { 3, "VW", "Up" },
+                    { 4, "VW", "id5" },
+                    { 5, "VW", "Golf" },
+                    { 6, "VW", "Beetle" },
+                    { 7, "VW", "Polo" },
+                    { 8, "Smart", "ForTwo" },
+                    { 9, "VW", "Bournemouth" },
+                    { 10, "VW", "Down" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
                 table: "AspNetUserClaims",
@@ -132,6 +165,9 @@ namespace workshop.webapi.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "cars");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

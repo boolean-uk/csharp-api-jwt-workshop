@@ -1,7 +1,7 @@
 using workshop.webapi.Enums;
 using Microsoft.AspNetCore.Identity;
 
-namespace workshop.webapi.Models;
+namespace workshop.webapi.DataModels;
 
 public class ApplicationUser : IdentityUser
 {
